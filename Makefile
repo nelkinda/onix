@@ -47,6 +47,18 @@ ONIX_BookProduct_DTDs+codes_Issue_40/: ONIX_BookProduct_DTDs+codes_Issue_40.zip
 	unzip -q $<
 	touch $@
 
+.PHONY: validate
+## Validates the downloaded sample files.
+# Note: The downloaded shorttags sample file lacks a namespace declaration.
+# Therefore, it only validates against DTD, not against XSD or RNG.
+validate: Samples/ ONIX_BookProduct_XSD_schema+codes_Issue_40/ ONIX_BookProduct_RNG_schema+codes_Issue_40/ ONIX_BookProduct_DTDs+codes_Issue_40/
+	xmllint --noout --relaxng ONIX_BookProduct_RNG_schema+codes_Issue_40/ONIX_BookProduct_3.0_reference.rng Samples/Onix3sample_refnames.xml
+	xmllint --noout --schema ONIX_BookProduct_XSD_schema+codes_Issue_40/ONIX_BookProduct_3.0_reference.xsd Samples/Onix3sample_refnames.xml
+	xmllint --noout --dtdvalid ONIX_BookProduct_DTDs+codes_Issue_40/ONIX_BookProduct_3.0_reference.dtd Samples/Onix3sample_refnames.xml
+	xmllint --noout --dtdvalid ONIX_BookProduct_DTDs+codes_Issue_40/ONIX_BookProduct_3.0_short.dtd Samples/Onix3sample_shorttags.xml
+	xmllint --noout --schema ONIX_BookProduct_XSD_schema+codes_Issue_40/ONIX_BookProduct_3.0_short.xsd Samples/Onix3sample_shorttags.xml
+	xmllint --noout --relaxng ONIX_BookProduct_RNG_schema+codes_Issue_40/ONIX_BookProduct_3.0_short.rng Samples/Onix3sample_shorttags.xml
+
 
 .PHONY: distclean
 distclean::
