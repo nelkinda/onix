@@ -62,4 +62,15 @@ validate: Samples/ ONIX_BookProduct_XSD_schema+codes_Issue_40/ ONIX_BookProduct_
 
 .PHONY: distclean
 distclean::
-	$(RM) ONIX_for_Books_Release3-0_docs+codes_Issue_40.zip ONIX_for_Books_Release3-0_docs+codes_Issue_40
+	$(RM) -r \
+	    ONIX_BookProduct_DTDs+codes_Issue_40/\
+	    ONIX_BookProduct_DTDs+codes_Issue_40.zip\
+	    ONIX_BookProduct_RNG_schema+codes_Issue_40/\
+	    ONIX_BookProduct_RNG_schema+codes_Issue_40.zip\
+	    ONIX_BookProduct_XSD_schema+codes_Issue_40/\
+	    ONIX_BookProduct_XSD_schema+codes_Issue_40.zip\
+	    ONIX_Books_3.0_sample_2.zip\
+	    ONIX_for_Books_Release3-0_docs+codes_Issue_40/\
+	    ONIX_for_Books_Release3-0_docs+codes_Issue_40.zip\
+	    Samples/\
+
